@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "jsx": "react",
+    "lib": [
+      "DOM",
+      "ES2016",
+      "ES2015.Promise"
+    ]
+  } 
+}
