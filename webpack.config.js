@@ -1,22 +1,23 @@
+var path = require("path");
+
 module.exports = {
   entry: {
     index: "./src/main/javascript/index.tsx"
   },
   output: {
-    path: "./target/generated-web-resources/assets/",
+    path: path.resolve(__dirname, "target/generated-web-resources/assets/"),
     filename: "[name].js"
   },
   resolve: {
-    modulesDirectories: [
+    modules: [
       "node_modules",
       "src/main/javascript"
     ]
   },
   module: {
-    loaders: [{
+    rules: [{
       test: /\.tsx?$/,
-      exclude: /node_modules/,
-      loader: "ts-loader"
+      use: "ts-loader"
     }]
   },
   devServer: {
