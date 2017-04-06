@@ -2,7 +2,7 @@ var path = require("path");
 
 module.exports = {
   entry: {
-    index: "./src/main/javascript/index.tsx"
+    simple: "./src/main/javascript/simple/simple.tsx"
   },
   output: {
     path: path.resolve(__dirname, "target/generated-web-resources/assets/"),
