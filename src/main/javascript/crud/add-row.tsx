@@ -1,5 +1,7 @@
 import React = require("react");
 import ReactDOM = require("react-dom");
+import FormEvent = React.FormEvent;
+import KeyboardEvent = React.KeyboardEvent;
 
 export class ProductAddRow extends React.Component<Props,void> {
 
@@ -15,16 +17,24 @@ export class ProductAddRow extends React.Component<Props,void> {
     this.priceInput.value = "";
   }
 
+  private addOnEnter( e: KeyboardEvent<HTMLInputElement> ) {
+    if( e.which === 13 ) {
+      this.add();
+    }
+  }
+
   render(): JSX.Element|any {
     return (
       <tr>
         <td>
           <input type="text"
-                 ref={ input => this.nameInput = input }/>
+                 ref={ input => this.nameInput = input }
+                 onKeyPress={ e => this.addOnEnter(e) }/>
         </td>
         <td>
           <input type="text"
-                 ref={ input => this.priceInput = input }/>
+                 ref={ input => this.priceInput = input }
+                 onKeyPress={ e => this.addOnEnter(e) }/>
         </td>
         <td>
           <button onClick={ e => this.add() }>
@@ -34,6 +44,7 @@ export class ProductAddRow extends React.Component<Props,void> {
       </tr>
     );
   }
+
 }
 
 interface Props {
