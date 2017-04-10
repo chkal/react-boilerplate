@@ -4,6 +4,10 @@ import { Product } from "./types";
 
 export class ProductViewRow extends React.Component<Props,void> {
 
+  onEditClicked() {
+    this.props.onEdit( this.props.product.id );
+  }
+
   onDeleteClicked() {
     this.props.onDelete( this.props.product.id );
   }
@@ -18,6 +22,9 @@ export class ProductViewRow extends React.Component<Props,void> {
           {this.props.product.price}
         </td>
         <td>
+          <button onClick={ e => this.onEditClicked() }>
+            Edit
+          </button>
           <button onClick={ e => this.onDeleteClicked() }>
             Delete
           </button>
@@ -30,4 +37,5 @@ export class ProductViewRow extends React.Component<Props,void> {
 interface Props {
   product: Product;
   onDelete: ( id: number ) => void;
+  onEdit: ( id: number ) => void;
 }

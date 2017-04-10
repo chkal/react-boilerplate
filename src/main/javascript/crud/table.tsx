@@ -3,6 +3,7 @@ import ReactDOM = require("react-dom");
 import { ProductAddRow } from "./add-row";
 import { ProductViewRow } from "./view-row";
 import { Product } from "./types";
+import { ProductEditRow } from "./edit-row";
 
 export class ProductTable extends React.Component<any,State> {
 
@@ -11,19 +12,50 @@ export class ProductTable extends React.Component<any,State> {
   constructor( props: any, context: any ) {
     super( props, context );
     this.state = {
-      products: []
+      products: [],
+      editing: null
     };
   }
 
   addProduct( name: string, price: number ) {
     this.setState( ( oldState ) => {
+      const product = {
+        id: this.nextId++,
+        name,
+        price
+      };
       return {
-        products: [...oldState.products, { id: this.nextId++, name, price }]
+        products: [...oldState.products, product],
+        editing: null
       };
     } )
   }
 
-  deleteProduct( id: number ) {
+  private editStart( id: number ) {
+    this.setState( {
+      editing: id
+    } );
+  }
+
+  private editCommit( product: any ) {
+    this.setState( oldState => {
+      return {
+        products: oldState.products.map( p => p.id === product.id ? product : p ),
+        editing: null
+      };
+    } );
+  }
+
+  private editCancel() {
+    this.setState( oldState => {
+      return {
+        ...oldState,
+        editing: null
+      }
+    } );
+  }
+
+  private deleteProduct( id: number ) {
     this.setState( oldState => {
       return {
         products: oldState.products.filter( p => p.id !== id )
@@ -47,9 +79,15 @@ export class ProductTable extends React.Component<any,State> {
             <ProductAddRow onAdd={ (n,p) => this.addProduct(n,p) }/>
             {
               this.state.products.map( product => (
-                <ProductViewRow product={product}
-                                key={product.id}
-                                onDelete={ p => this.deleteProduct(p) }/>
+                product.id === this.state.editing
+                  ? <ProductEditRow product={product}
+                                    key={product.id}
+                                    onCommit={ p => this.editCommit(p) }
+                                    onCancel={ () => this.editCancel() }/>
+                  : <ProductViewRow product={product}
+                                    key={product.id}
+                                    onEdit={ id => this.editStart(id)}
+                                    onDelete={ id => this.deleteProduct(id) }/>
               ) )
             }
           </tbody>
@@ -57,9 +95,9 @@ export class ProductTable extends React.Component<any,State> {
       </div>
     );
   }
-
 }
 
 interface State {
   products: Product[];
+  editing: number;
 }
