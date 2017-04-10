@@ -47,11 +47,8 @@ export class ProductTable extends React.Component<any,State> {
   }
 
   private editCancel() {
-    this.setState( oldState => {
-      return {
-        ...oldState,
-        editing: null
-      }
+    this.setState( {
+      editing: null
     } );
   }
 
