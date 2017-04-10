@@ -27,17 +27,17 @@ export class ProductAddRow extends React.Component<Props,void> {
     return (
       <tr>
         <td>
-          <input type="text"
+          <input type="text" className="form-control"
                  ref={ input => this.nameInput = input }
                  onKeyPress={ e => this.addOnEnter(e) }/>
         </td>
         <td>
-          <input type="text"
+          <input type="text" className="form-control"
                  ref={ input => this.priceInput = input }
                  onKeyPress={ e => this.addOnEnter(e) }/>
         </td>
-        <td>
-          <button onClick={ e => this.add() }>
+        <td className="text-center">
+          <button onClick={ e => this.add() } className="btn btn-primary">
             Add
           </button>
         </td>

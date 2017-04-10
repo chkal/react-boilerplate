@@ -64,12 +64,12 @@ export class ProductTable extends React.Component<any,State> {
     return (
       <div>
         <h1>Products</h1>
-        <table>
+        <table className="table">
           <thead>
             <tr>
               <th>Name</th>
               <th>Price</th>
-              <th>Actions</th>
+              <th className="text-center">Actions</th>
             </tr>
           </thead>
           <tbody>

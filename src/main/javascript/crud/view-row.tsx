@@ -21,11 +21,11 @@ export class ProductViewRow extends React.Component<Props,void> {
         <td>
           {this.props.product.price}
         </td>
-        <td>
-          <button onClick={ e => this.onEditClicked() }>
+        <td className="text-center">
+          <button onClick={ e => this.onEditClicked() } className="btn btn-default">
             Edit
           </button>
-          <button onClick={ e => this.onDeleteClicked() }>
+          <button onClick={ e => this.onDeleteClicked() } className="btn btn-danger">
             Delete
           </button>
         </td>

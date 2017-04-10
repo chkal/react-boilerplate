@@ -23,20 +23,20 @@ export class ProductEditRow extends React.Component<Props,void> {
     return (
       <tr>
         <td>
-          <input type="text"
+          <input type="text" className="form-control"
                  ref={ input => this.nameInput = input }
                  defaultValue={this.props.product.name}/>
         </td>
         <td>
-          <input type="text"
+          <input type="text" className="form-control"
                  ref={ input => this.priceInput = input }
                  defaultValue={this.props.product.price.toFixed(2)}/>
         </td>
-        <td>
-          <button onClick={ e => this.onSave() }>
+        <td className="text-center">
+          <button onClick={ e => this.onSave() } className="btn btn-default">
             Save
           </button>
-          <button onClick={ e => this.onCancel() }>
+          <button onClick={ e => this.onCancel() } className="btn btn-default">
             Cancel
           </button>
         </td>
